@@ -47,6 +47,8 @@ class SignInViewModel constructor(
     }
 
     fun signIn() {
+        viewModelScope.launch {
+        }
     }
 }
 
