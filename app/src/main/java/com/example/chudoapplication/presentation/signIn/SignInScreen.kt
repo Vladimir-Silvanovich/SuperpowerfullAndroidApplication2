@@ -10,19 +10,27 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -30,12 +38,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.chudoapplication.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,12 +56,14 @@ import kotlinx.coroutines.withContext
 @Composable
 fun SignInScreen(
     modifier: Modifier = Modifier,
-    onSignUpClick: () -> Unit,
-    onSignInSuccess: () -> Unit,
+    viewModel: SignInViewModel = viewModel()
 ) {
+
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
+    val email by viewModel.email.collectAsState()
+    val password by viewModel.password.collectAsState()
 
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -61,15 +75,9 @@ fun SignInScreen(
                 .fillMaxHeight(),
             contentAlignment = Alignment.TopCenter
         ) {
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                painter = painterResource(id = R.drawable.login_background),
-                contentDescription = null
-            )
-
-            val email = viewModel.email.collectAsState()
-            val password = viewModel.password.collectAsState()
+//
+//            val email = viewModel.email.collectAsState()
+//            val password = viewModel.password.collectAsState()
 
             Column(
                 modifier = Modifier
@@ -85,68 +93,22 @@ fun SignInScreen(
                     text = "Sign In",
                     style = MaterialTheme.typography.headlineMedium
                 )
-                IconTextInput(
-                    leadingIcon = Icons.Filled.Email,
-                    trailingIcon = Icons.Filled.Backspace,
-                    value = email.value,
-                    placeholder = "Email",
-                    onValueChange = {
-                        viewModel.onEmailChange(it)
-                    },
-                    onTrailingIconClick = {
-                        viewModel.onRemoveText()
-                    },
+                TextField(
+                    value = email,
+                    onValueChange = { viewModel.onEmailChange(it) },
+                    label = { Text("Email") }
                 )
-                val showPassword = remember { mutableStateOf(false) }
-                IconTextInput(
-                    leadingIcon = Icons.Filled.Lock,
-                    trailingIcon = if (showPassword.value) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff,
-                    value = password.value,
-                    placeholder = "Password",
-                    type = KeyboardType.Password,
-                    visualTransformation = if (showPassword.value) VisualTransformation.None else PasswordVisualTransformation(),
-                    onValueChange = {
-                        viewModel.onPasswordChange(it)
-                    },
-                    onTrailingIconClick = {
-                        showPassword.value = !showPassword.value
-                    },
+                TextField(
+                    value = password,
+                    onValueChange = { viewModel.onPasswordChange(it) },
+                    label = { Text("Password") }
                 )
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = {
-                        if (viewModel.isValidEmail())
-                            viewModel.signIn()
-                        else {
-                            coroutineScope.launch {
-                                withContext(Dispatchers.Main){
-                                    snackbarHostState.showSnackbar("Invalid Email address!")
-                                }
-                            }
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.colorPrimary)),
-                ) {
-                    Text("Sign in")
-                }
-                OutlinedButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = onSignUpClick,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Transparent,
-                        contentColor = colorResource(id = R.color.colorPrimary)
-                    ),
-                ) {
-                    Text("Sign up")
-                }
             }
         }
     }
-
 }
-
 @Preview
 @Composable
 fun SignInScreenPreview() {
-    SignInScreen(onSignUpClick = {}, onSignInSuccess = {})
+    SignInScreen()
 }

@@ -1,8 +1,12 @@
 package com.example.chudoapplication.presentation.signIn
 
+import android.util.Log
 import android.util.Patterns.EMAIL_ADDRESS
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.chudoapplication.data.network.supabase
+import com.example.chudoapplication.domain.models.UserModel
+import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -41,24 +45,7 @@ class SignInViewModel constructor(
 
     fun signIn() {
         viewModelScope.launch {
-            when (signInUseCase(
-                SignInUseCase.Input(
-                    email = _email.value,
-                    password = _password.value
-                )
-            )) {
-                is SignInUseCase.Output.Error -> {
-                    //TODO Handle show general error
-                }
-
-                is SignInUseCase.Output.AccountNotExistedError -> {
-                    _showAccountNotExistedError.emit(Unit)
-                }
-
-                else -> {
-                    _isSignUpSuccessful.emit(Unit)
-                }
+                Log.e("ROFL","WORK")
             }
         }
     }
-}

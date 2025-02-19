@@ -1,17 +1,13 @@
 package com.example.chudoapplication.domain.usecase.impl
 
-import com.hieuwu.groceriesstore.data.repository.UserRepository
-import com.hieuwu.groceriesstore.di.IoDispatcher
-import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
+import com.example.chudoapplication.data.repository.UserRepository
+import com.example.chudoapplication.domain.usecase.SignInUseCase
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
-import javax.inject.Inject
 
-class SignInUseCaseImpl @Inject constructor(
+class SignInUseCaseImpl(
     private val userRepository: UserRepository,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    private val ioDispatcher: CoroutineDispatcher,
 ) :
     SignInUseCase {
     override suspend fun invoke(input: SignInUseCase.Input): SignInUseCase.Output {
@@ -20,7 +16,6 @@ class SignInUseCaseImpl @Inject constructor(
                 val res = userRepository.authenticate(input.email, input.password)
                 SignInUseCase.Output(res)
             } catch (e: Exception) {
-                Timber.d(e.message)
                 SignInUseCase.Output.AccountNotExistedError
             }
         }

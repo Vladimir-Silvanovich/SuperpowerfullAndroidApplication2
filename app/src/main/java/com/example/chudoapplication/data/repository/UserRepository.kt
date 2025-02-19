@@ -1,7 +1,6 @@
 package com.example.chudoapplication.data.repository
 
 import com.example.chudoapplication.domain.models.UserModel
-import com.hieuwu.groceriesstore.domain.models.UserModel
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
