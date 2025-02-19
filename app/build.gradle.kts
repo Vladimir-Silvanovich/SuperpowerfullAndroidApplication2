@@ -74,6 +74,7 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:auth-kt")
     implementation("io.github.jan-tennert.supabase:realtime-kt")
     implementation("io.ktor:ktor-client-android:1.6.0")
+    implementation("androidx.navigation:navigation-compose:2.7.0")
     implementation("io.github.jan-tennert.supabase:serializer-jackson:2.18.2")
 
 }

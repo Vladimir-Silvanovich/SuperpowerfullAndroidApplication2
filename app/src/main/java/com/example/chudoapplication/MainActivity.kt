@@ -20,6 +20,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ChudoApplicationTheme {
+
                 SignInScreen()
             }
         }

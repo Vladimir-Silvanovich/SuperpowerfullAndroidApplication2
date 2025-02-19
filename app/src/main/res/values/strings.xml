@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ChudoApplication</string>
+    <string name="sign_in">Sign In</string>
+    <string name="choose_entree">Sign-Up</string>
+    <string name="splash_screemn">SplashScreen\n</string>
 </resources>

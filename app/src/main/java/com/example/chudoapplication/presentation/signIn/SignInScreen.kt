@@ -47,6 +47,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -80,7 +81,7 @@ fun SignInScreen(
 
             Column(
                 modifier = Modifier
-                    .padding(top = 320.dp, start = 20.dp, end = 20.dp)
+                    .padding(top = 320.dp, bottom = 20.dp)
                     .fillMaxWidth()
                     .background(
                         color = Color.White,
@@ -90,8 +91,16 @@ fun SignInScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Sign In",
+                    text = "Привет",
                     style = MaterialTheme.typography.headlineMedium
+                )
+                Text(
+                    text = "Заполните Свои Данные или Прдолжайте Через Социальные Медиа",
+                    fontSize = 12.sp,
+                    style = MaterialTheme.typography.headlineMedium,
+                    lineHeight = 14.sp,
+                    color = Color.Gray,
+                    modifier = Modifier.fillMaxWidth(0.4f)
                 )
                 TextField(
                     value = email,
