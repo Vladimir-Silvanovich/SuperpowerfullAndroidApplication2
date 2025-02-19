@@ -103,6 +103,10 @@ fun SignInScreen(
                     onValueChange = { viewModel.onPasswordChange(it) },
                     label = { Text("Password") }
                 )
+                Button(onClick = {viewModel.signIn()})
+                {
+                    Text("Войти")
+                }
             }
         }
     }
