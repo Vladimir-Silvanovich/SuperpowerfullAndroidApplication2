@@ -48,9 +48,6 @@ class SignInViewModel constructor(
 
     fun signIn() {
         viewModelScope.launch {
-            supabase.auth.sessionStatus.collect {
-
-            }
         }
     }
 }
