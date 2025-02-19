@@ -87,6 +87,7 @@ fun SignInScreen(
                         shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp)
                     ),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = "Sign In",
@@ -110,6 +111,7 @@ fun SignInScreen(
         }
     }
 }
+
 @Preview
 @Composable
 fun SignInScreenPreview() {
