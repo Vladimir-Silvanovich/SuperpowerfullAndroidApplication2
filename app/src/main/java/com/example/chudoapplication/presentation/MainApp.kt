@@ -15,6 +15,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.chudoapplication.R
 import com.example.chudoapplication.presentation.Onboard.OnBoard1
+import com.example.chudoapplication.presentation.Onboard.OnBoard2
+import com.example.chudoapplication.presentation.Onboard.OnBoard3
 import com.example.chudoapplication.presentation.home.HomeScreen
 import com.example.chudoapplication.presentation.signIn.SignInScreen
 import com.example.chudoapplication.presentation.signIn.SignInViewModel
@@ -58,12 +60,12 @@ fun MainApp(
             OnBoard1(onButtonClick = {navController.navigate(AppScreen.OnBoard2.name)})
         }
         composable(route = AppScreen.OnBoard2.name) {
-            OnBoard1(onButtonClick = {navController.navigate(AppScreen.OnBoard3.name)})
+            OnBoard2(onButtonClick = {navController.navigate(AppScreen.OnBoard3.name)})
         }
         composable(route = AppScreen.OnBoard3.name) {
-            OnBoard1(onButtonClick = {navController.navigate(AppScreen.HomeScreen.name)})
+            OnBoard3(onButtonClick = {navController.navigate(AppScreen.HomeScreen.name)})
         }
-        composable(route = AppScreen.OnBoard3.name) {
+        composable(route = AppScreen.HomeScreen.name) {
             HomeScreen()
         }
     }
