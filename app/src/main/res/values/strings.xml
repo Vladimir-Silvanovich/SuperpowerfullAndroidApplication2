@@ -3,4 +3,8 @@
     <string name="sign_in">Sign In</string>
     <string name="choose_entree">Sign-Up</string>
     <string name="splash_screemn">SplashScreen\n</string>
+    <string name="onboard1">onboard1</string>
+    <string name="onboard2">onboard2</string>
+    <string name="onboard3">onboard3</string>
+    <string name="home_screen">Home Screen</string>
 </resources>

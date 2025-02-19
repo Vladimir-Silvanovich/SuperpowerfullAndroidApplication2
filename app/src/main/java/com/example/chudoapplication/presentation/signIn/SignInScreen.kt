@@ -56,7 +56,8 @@ import kotlinx.coroutines.withContext
 @Composable
 fun SignInScreen(
     modifier: Modifier = Modifier,
-    viewModel: SignInViewModel = viewModel()
+    viewModel: SignInViewModel = viewModel(),
+    onEnterClicked: () -> Unit = {}
 ) {
 
     val snackbarHostState = remember { SnackbarHostState() }
@@ -112,7 +113,7 @@ fun SignInScreen(
                     onValueChange = { viewModel.onPasswordChange(it) },
                     label = { Text("Password") }
                 )
-                Button(onClick = {viewModel.signIn()})
+                Button(onClick = onEnterClicked)
                 {
                     Text("Войти")
                 }
