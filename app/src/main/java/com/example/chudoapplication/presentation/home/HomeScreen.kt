@@ -3,6 +3,7 @@
 package com.example.chudoapplication.presentation.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,6 +33,7 @@ import com.example.chudoapplication.presentation.UiElements.TopBar
 
 @Composable
 fun HomeScreen(
+    onButtonPush: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 //    val viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
@@ -46,6 +48,7 @@ fun HomeScreen(
         ) {
             SearchField(
 //                categories = categories
+                onButtonPush = onButtonPush
             )
         }
 
@@ -55,6 +58,7 @@ fun HomeScreen(
 @Composable
 fun SearchField(
     modifier: Modifier = Modifier,
+    onButtonPush: () -> Unit
 //    categories: List<Category>
 ) {
     Row (
@@ -90,7 +94,7 @@ fun SearchField(
     Spacer(Modifier.height(50.dp))
     Image(painter = painterResource(id = R.drawable.mainmenu), contentDescription = "",
         contentScale = ContentScale.FillBounds,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize().clickable { onButtonPush() }
     )
 }
 
@@ -115,5 +119,5 @@ fun Categories(
 @Preview
 @Composable
 fun Preview() {
-    HomeScreen()
+    HomeScreen({})
 }

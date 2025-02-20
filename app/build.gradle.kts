@@ -84,6 +84,8 @@ dependencies {
     annotationProcessor(libs.hilt.compiler)
     //noinspection GradleDependency
     implementation(libs.androidx.hilt.navigation.compose)
+    //noinspection UseTomlInstead
+    implementation ("androidx.compose.material:material")
 
 
 }

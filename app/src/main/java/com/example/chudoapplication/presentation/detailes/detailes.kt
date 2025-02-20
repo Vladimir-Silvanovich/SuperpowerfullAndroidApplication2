@@ -1,6 +1,7 @@
 package com.example.chudoapplication.presentation.detailes
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,6 +27,7 @@ import com.example.chudoapplication.presentation.favorite.FavoriteScreen
 
 @Composable
 fun DetailsScreen(
+    onButtonClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ){
     TopBar(
@@ -50,7 +52,8 @@ fun DetailsScreen(
                     modifier = Modifier.scale(0.8f).padding(10.dp,0.dp,0.dp,0.dp))
                 Image(painter = painterResource(R.drawable.button_buy),
                     contentDescription = null,
-                    modifier = Modifier.scale(1.4f).padding(0.dp,0.dp,40.dp,0.dp))
+                    modifier = Modifier.scale(1.4f).padding(0.dp,0.dp,40.dp,0.dp)
+                        .clickable { onButtonClick() })
             }
         }
     }

@@ -18,6 +18,7 @@ import com.example.chudoapplication.presentation.UiElements.SinkersCard
 
 @Composable
 fun FavoriteScreen(
+    onButtonClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val cards = listOf(
@@ -38,7 +39,7 @@ fun FavoriteScreen(
                 modifier = Modifier.padding(20.dp)
             ) {
                 items(cards) {
-                    SinkersCard(modifier=Modifier.padding(8.dp))
+                    SinkersCard(modifier=Modifier.padding(8.dp), onCardClick = onButtonClick)
                 }
             }
         }

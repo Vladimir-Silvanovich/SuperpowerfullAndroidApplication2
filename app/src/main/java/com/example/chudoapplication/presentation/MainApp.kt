@@ -17,7 +17,10 @@ import com.example.chudoapplication.R
 import com.example.chudoapplication.presentation.Onboard.OnBoard1
 import com.example.chudoapplication.presentation.Onboard.OnBoard2
 import com.example.chudoapplication.presentation.Onboard.OnBoard3
+import com.example.chudoapplication.presentation.detailes.DetailsScreen
+import com.example.chudoapplication.presentation.favorite.FavoriteScreen
 import com.example.chudoapplication.presentation.home.HomeScreen
+import com.example.chudoapplication.presentation.myCart.MyCart
 import com.example.chudoapplication.presentation.signIn.SignInScreen
 import com.example.chudoapplication.presentation.signIn.SignInViewModel
 import com.example.chudoapplication.presentation.splashScreen.SplashScreen
@@ -29,7 +32,10 @@ enum class AppScreen(@StringRes val title: Int) {
     OnBoard1(title = R.string.onboard1),
     OnBoard2(title = R.string.onboard2),
     OnBoard3(title = R.string.onboard3),
-    HomeScreen(title = R.string.home_screen)
+    HomeScreen(title = R.string.home_screen),
+    Favorites(title = R.string.favorites),
+    DetailScreen(title = R.string.detailed_screen),
+    MyCart(title = R.string.my_cart)
 }
 
 @Composable
@@ -66,7 +72,16 @@ fun MainApp(
             OnBoard3(onButtonClick = {navController.navigate(AppScreen.HomeScreen.name)})
         }
         composable(route = AppScreen.HomeScreen.name) {
-            HomeScreen()
+            HomeScreen(onButtonPush = {navController.navigate(AppScreen.Favorites.name)})
+        }
+        composable(route = AppScreen.Favorites.name) {
+            FavoriteScreen(onButtonClick = {navController.navigate(AppScreen.DetailScreen.name)})
+        }
+        composable(route = AppScreen.DetailScreen.name) {
+            DetailsScreen(onButtonClick = {navController.navigate(AppScreen.MyCart.name)} )
+        }
+        composable(route = AppScreen.MyCart.name) {
+            MyCart()
         }
     }
 }

@@ -30,11 +30,13 @@ import com.example.chudoapplication.R
 
 @Composable
 fun SinkersCard(
+    onCardClick: () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = modifier
             .height(160.dp).width(140.dp),
+        onClick = onCardClick
     ) {
         Column {
             Image(

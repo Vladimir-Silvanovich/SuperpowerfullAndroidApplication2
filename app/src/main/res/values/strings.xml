@@ -7,4 +7,7 @@
     <string name="onboard2">onboard2</string>
     <string name="onboard3">onboard3</string>
     <string name="home_screen">Home Screen</string>
+    <string name="favorites">favorites</string>
+    <string name="detailed_screen">DetailesScreen</string>
+    <string name="my_cart">MyCart</string>
 </resources>
