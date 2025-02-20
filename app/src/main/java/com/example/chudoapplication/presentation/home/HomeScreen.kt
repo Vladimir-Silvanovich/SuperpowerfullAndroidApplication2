@@ -6,7 +6,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -14,10 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -26,7 +22,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -38,11 +33,16 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.chudoapplication.R
+import androidx.compose.foundation.lazy.items
+import com.example.chudoapplication.domain.models.Category
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
+//    val viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
+//    val categories = viewModel.categories.collectAsState().value
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -80,13 +80,18 @@ fun HomeScreen(
         Column (
             modifier = Modifier.padding(innerPadding)
         ) {
-            SearchField()
+            SearchField(
+//                categories = categories
+            )
         }
     }
 }
 
 @Composable
-fun SearchField(modifier: Modifier = Modifier) {
+fun SearchField(
+    modifier: Modifier = Modifier,
+//    categories: List<Category>
+) {
     Row (
         horizontalArrangement = Arrangement.SpaceAround,
         modifier = Modifier.fillMaxWidth()
@@ -108,9 +113,7 @@ fun SearchField(modifier: Modifier = Modifier) {
         )
     }
     Spacer(Modifier.height(50.dp))
-    Image(painter = painterResource(id = R.drawable.categories), contentDescription = "", modifier = Modifier.fillMaxWidth(),
-        contentScale = ContentScale.Fit
-        )
+//    Categories(categories = categories)
     Spacer(Modifier.height(50.dp))
     Row (
         horizontalArrangement = Arrangement.SpaceAround,
@@ -124,6 +127,24 @@ fun SearchField(modifier: Modifier = Modifier) {
         contentScale = ContentScale.FillBounds,
         modifier = Modifier.fillMaxSize()
     )
+}
+
+@Composable
+fun Categories(
+    categories: List<Category> ,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn {
+        items(
+            categories,
+            key = { instrument -> instrument.id },
+        ) { instrument ->
+            Text(
+                instrument.title,
+                modifier = Modifier.padding(8.dp),
+            )
+        }
+    }
 }
 
 @Preview

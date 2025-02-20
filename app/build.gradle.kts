@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("plugin.serialization") version "2.1.0"
 }
 
 android {
@@ -69,12 +70,20 @@ dependencies {
     implementation(libs.ktor.client.cio.v160)
     implementation(libs.ktor.client.serialization)
     implementation(libs.kotlinx.coroutines.core.v150)
+    implementation("io.ktor:ktor-client-content-negotiation:3.0.3")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.3")
     implementation(platform("io.github.jan-tennert.supabase:bom:3.1.1"))
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.github.jan-tennert.supabase:auth-kt")
     implementation("io.github.jan-tennert.supabase:realtime-kt")
-    implementation("io.ktor:ktor-client-android:1.6.0")
-    implementation("androidx.navigation:navigation-compose:2.7.0")
-    implementation("io.github.jan-tennert.supabase:serializer-jackson:2.18.2")
+    implementation("io.ktor:ktor-client-android:2.3.0")
+    implementation("io.ktor:ktor-client-core:3.0.3")
+    implementation (libs.ktor.utils)
+    implementation("androidx.navigation:navigation-compose:2.8.7")
+    implementation (libs.hilt.android)
+    annotationProcessor(libs.hilt.compiler)
+    //noinspection GradleDependency
+    implementation(libs.androidx.hilt.navigation.compose)
+
 
 }
