@@ -1,9 +1,9 @@
 package com.example.chudoapplication.data.repository.impl
 
 import com.example.chudoapplication.data.entities.CategoryDto
-import com.example.chudoapplication.data.network.supabase
 import com.example.chudoapplication.data.repository.CategoryRepository
 import com.example.chudoapplication.domain.models.Category
+import com.example.chudoapplication.supabase
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.Dispatchers

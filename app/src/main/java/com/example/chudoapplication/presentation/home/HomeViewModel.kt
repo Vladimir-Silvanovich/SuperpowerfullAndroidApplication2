@@ -33,12 +33,23 @@ class HomeViewModel(
         emit(categories)
     }
 
-    val categories: StateFlow<List<Category>> = categoryFlow
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = emptyList()
-        )
+    private val _categoryList = MutableStateFlow<List<Category>?>(listOf())
+    val categoryList: Flow<List<Category>?> = _categoryList
+
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: Flow<Boolean> = _isLoading
+
+    init {
+        getProducts()
+    }
+
+    fun getProducts() {
+        viewModelScope.launch {
+            val categories = categoryRepository.getCategories()
+            _categoryList.emit(categories?.map { it -> it.asDomainModel() })
+        }
+    }
 
     suspend fun getCategories(): List<CategoryDto>? {
         return withContext(Dispatchers.IO) {

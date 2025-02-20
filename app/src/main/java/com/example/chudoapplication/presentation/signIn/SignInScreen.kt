@@ -3,12 +3,16 @@ package com.example.chudoapplication.presentation.signIn
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -47,7 +51,11 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.chudoapplication.R
+import com.example.chudoapplication.presentation.UiElements.LoginTextField
+import com.example.chudoapplication.presentation.UiElements.PasswordTextField
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -56,7 +64,8 @@ import kotlinx.coroutines.withContext
 fun SignInScreen(
     modifier: Modifier = Modifier,
     viewModel: SignInViewModel = viewModel(),
-    onEnterClicked: () -> Unit = {}
+    onEnterClicked: () -> Unit = {},
+    onRegisterClicked: () -> Unit = {}
 ) {
 
     val snackbarHostState = remember { SnackbarHostState() }
@@ -75,39 +84,40 @@ fun SignInScreen(
                 .fillMaxHeight(),
             contentAlignment = Alignment.TopCenter
         ) {
-//
-//            val email = viewModel.email.collectAsState()
-//            val password = viewModel.password.collectAsState()
-
             Column(
                 modifier = Modifier
-                    .padding(top = 320.dp, start = 20.dp, end = 20.dp)
+                    .padding(top = 150.dp, start = 20.dp, end = 20.dp)
                     .fillMaxWidth()
                     .background(
-                        color = Color.White,
-                        shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp)
-                    ),
+                        color = Color.White
+                    ).fillMaxHeight(),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = "Sign In",
-                    style = MaterialTheme.typography.headlineMedium
+                Image(
+                    contentDescription = null,
+                    painter = painterResource(R.drawable.signinhello),
+                    modifier = Modifier.fillMaxWidth().fillMaxHeight(0.2f)
                 )
-                TextField(
-                    value = email,
-                    onValueChange = { viewModel.onEmailChange(it) },
-                    label = { Text("Email") }
-                )
-                TextField(
-                    value = password,
-                    onValueChange = { viewModel.onPasswordChange(it) },
-                    label = { Text("Password") }
-                )
+                Text("Email",
+                    fontSize = 18.sp,
+                    modifier = Modifier.fillMaxWidth().padding(17.dp,5.dp))
+                LoginTextField("xyz@gmail.com")
+                Text("Пароль",
+                    fontSize = 18.sp,
+                    modifier = Modifier.fillMaxWidth().padding(17.dp,5.dp))
+                PasswordTextField()
                 Button(onClick = onEnterClicked)
                 {
                     Text("Войти")
                 }
+                Spacer(Modifier.height(100.dp))
+                Image(contentDescription = "",
+                    painter = painterResource(R.drawable.signinwithoutaccount),
+                    modifier = Modifier.clickable {
+                        onRegisterClicked()
+                    }
+                )
             }
         }
     }

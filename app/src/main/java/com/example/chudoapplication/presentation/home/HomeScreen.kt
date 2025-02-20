@@ -28,16 +28,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.chudoapplication.R
 import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.chudoapplication.domain.models.Category
 import com.example.chudoapplication.presentation.UiElements.TopBar
 
 @Composable
 fun HomeScreen(
     onButtonPush: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
 ) {
-//    val viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
-//    val categories = viewModel.categories.collectAsState().value
+    val isLoading by viewModel.isLoading.collectAsState(initial = false)
+    val categories = viewModel.categoryList.collectAsState(initial = listOf()).value ?: listOf()
+
     TopBar(
         title = R.drawable.home,
         iconLeft = ImageVector.vectorResource(R.drawable.poloski3),
@@ -47,7 +52,7 @@ fun HomeScreen(
             modifier = Modifier.padding(innerPadding)
         ) {
             SearchField(
-//                categories = categories
+                categories = categories,
                 onButtonPush = onButtonPush
             )
         }
@@ -58,8 +63,8 @@ fun HomeScreen(
 @Composable
 fun SearchField(
     modifier: Modifier = Modifier,
-    onButtonPush: () -> Unit
-//    categories: List<Category>
+    onButtonPush: () -> Unit,
+    categories: List<Category>
 ) {
     Row (
         horizontalArrangement = Arrangement.SpaceAround,
@@ -82,7 +87,7 @@ fun SearchField(
         )
     }
     Spacer(Modifier.height(50.dp))
-//    Categories(categories = categories)
+    Categories(categories = categories)
     Spacer(Modifier.height(50.dp))
     Row (
         horizontalArrangement = Arrangement.SpaceAround,

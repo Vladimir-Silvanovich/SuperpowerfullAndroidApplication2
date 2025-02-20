@@ -4,12 +4,6 @@ import android.util.Log
 import android.util.Patterns.EMAIL_ADDRESS
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.chudoapplication.data.network.supabase
-import com.example.chudoapplication.domain.models.UserModel
-import io.github.jan.supabase.auth.auth
-import io.github.jan.supabase.auth.status.SessionSource
-import io.github.jan.supabase.auth.status.SessionStatus
-import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
