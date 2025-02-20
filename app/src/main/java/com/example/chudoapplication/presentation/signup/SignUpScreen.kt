@@ -43,6 +43,8 @@ fun SignUpScreen(){
             modifier = Modifier.padding(it).fillMaxWidth().padding(0.dp,20.dp,0.dp,0.dp).fillMaxHeight()
         ) {
             Image(
+
+
                 contentDescription = null,
                 painter = painterResource(R.drawable.signuptitle),
                 modifier = Modifier.scale(1.5f)
