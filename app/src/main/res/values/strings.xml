@@ -10,4 +10,7 @@
     <string name="favorites">favorites</string>
     <string name="detailed_screen">DetailesScreen</string>
     <string name="my_cart">MyCart</string>
+    <string name="forgotpassword">forgotPassword</string>
+    <string name="verification">verification</string>
+    <string name="checkout">checkout</string>
 </resources>

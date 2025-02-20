@@ -38,10 +38,10 @@ import com.example.chudoapplication.presentation.UiElements.TopBar
 fun HomeScreen(
     onButtonPush: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
+//    viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
 ) {
-    val isLoading by viewModel.isLoading.collectAsState(initial = false)
-    val categories = viewModel.categoryList.collectAsState(initial = listOf()).value ?: listOf()
+//    val isLoading by viewModel.isLoading.collectAsState(initial = false)
+//    val categories = viewModel.categoryList.collectAsState(initial = listOf()).value ?: listOf()
 
     TopBar(
         title = R.drawable.home,
@@ -52,7 +52,7 @@ fun HomeScreen(
             modifier = Modifier.padding(innerPadding)
         ) {
             SearchField(
-                categories = categories,
+//                categories = categories,
                 onButtonPush = onButtonPush
             )
         }
@@ -64,7 +64,7 @@ fun HomeScreen(
 fun SearchField(
     modifier: Modifier = Modifier,
     onButtonPush: () -> Unit,
-    categories: List<Category>
+//    categories: List<Category>
 ) {
     Row (
         horizontalArrangement = Arrangement.SpaceAround,
@@ -87,7 +87,7 @@ fun SearchField(
         )
     }
     Spacer(Modifier.height(50.dp))
-    Categories(categories = categories)
+//    Categories(categories = categories)
     Spacer(Modifier.height(50.dp))
     Row (
         horizontalArrangement = Arrangement.SpaceAround,

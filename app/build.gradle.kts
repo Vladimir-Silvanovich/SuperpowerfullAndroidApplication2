@@ -81,6 +81,8 @@ dependencies {
     implementation (libs.ktor.utils)
     implementation("androidx.navigation:navigation-compose:2.8.7")
     implementation (libs.hilt.android)
+    //noinspection UseTomlInstead
+    implementation ("androidx.appcompat:appcompat:1.7.0")
     annotationProcessor(libs.hilt.compiler)
     //noinspection GradleDependency
     implementation(libs.androidx.hilt.navigation.compose)

@@ -1,6 +1,7 @@
 package com.example.chudoapplication.presentation.signup
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,13 +32,17 @@ import com.example.chudoapplication.presentation.UiElements.TopBar
 import com.example.chudoapplication.presentation.favorite.FavoriteScreen
 
 @Composable
-fun SignUpScreen(){
+fun SignUpScreen(
+    onEnterClicked: () -> Unit = {},
+    onSignInClicked: () -> Unit = {}
+){
     TopBar(
         title = R.drawable.logo,
         iconLeft = Icons.AutoMirrored.Filled.ArrowBack,
         iconRight = Icons.Default.AccountCircle
+
     ) {
-        
+
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,13 +71,15 @@ fun SignUpScreen(){
             Image(
                 contentDescription = null,
                 painter = painterResource(R.drawable.signupbutton),
-                modifier = Modifier.scale(1.5f)
+                modifier = Modifier.scale(1.5f).clickable { onEnterClicked() }
             )
             Spacer(modifier = Modifier.height(40.dp))
             Image(
                 contentDescription = null,
                 painter = painterResource(R.drawable.signupsignin),
-                modifier = Modifier.scale(1.2f)
+                modifier = Modifier.scale(1.2f).clickable {
+                    onSignInClicked()
+                }
             )
 
         }

@@ -1,6 +1,7 @@
 package com.example.chudoapplication.presentation.myCart
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,7 +29,9 @@ import com.example.chudoapplication.presentation.UiElements.TopBar
 import com.example.chudoapplication.presentation.favorite.FavoriteScreen
 
 @Composable
-fun MyCart(){
+fun MyCart(
+    onButtonClick: () -> Unit = {}
+){
     val cards = listOf(
         "","","","","","","","","","","","","",
     )
@@ -56,6 +59,7 @@ fun MyCart(){
                     contentDescription = null,
                     painter = painterResource(R.drawable.buybutton),
                     modifier = Modifier.fillMaxSize().padding(0.dp,700.dp,0.dp,0.dp)
+                        .clickable { onButtonClick() }
                 )
         }
     }

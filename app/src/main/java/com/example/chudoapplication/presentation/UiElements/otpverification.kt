@@ -15,7 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun OtpVerification() {
+fun OtpVerification(
+    onButtonClicked: () -> Unit = {},
+) {
     var otpCode by remember { mutableStateOf("") }
     val otpLength = 6
 
@@ -52,7 +54,7 @@ fun OtpVerification() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        TextButton(onClick = { /* Логика повторной отправки OTP */ }) {
+        TextButton(onClick = onButtonClicked) {
             Text(text = "Отправить заново")
         }
 

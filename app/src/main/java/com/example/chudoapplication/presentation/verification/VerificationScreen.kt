@@ -28,6 +28,7 @@ import com.example.chudoapplication.presentation.UiElements.TopBar
 
 @Composable
 fun VerificationScreen(
+    onButtonClicked: () -> Unit = {},
     modifier: Modifier = Modifier
 ){
     TopBar(
@@ -44,7 +45,7 @@ fun VerificationScreen(
                 painter = painterResource(R.drawable.otpcheck),
                 modifier = Modifier.scale(1.5f)
             )
-            OtpVerification()
+            OtpVerification(onButtonClicked)
             Spacer(modifier = Modifier.fillMaxHeight(0.2f))
         }
     }

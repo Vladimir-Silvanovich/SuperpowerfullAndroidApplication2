@@ -1,6 +1,7 @@
 package com.example.chudoapplication.presentation.checkout
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -16,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -29,6 +31,7 @@ import com.example.chudoapplication.presentation.UiElements.TopBar
 
 @Composable
 fun CheckOutScreen(
+    onButtonClicked: () -> Unit = {},
     modifier: Modifier = Modifier
 ){
     TopBar(
@@ -36,7 +39,7 @@ fun CheckOutScreen(
         iconLeft = Icons.AutoMirrored.Filled.ArrowBack,
         iconRight = Icons.Default.LocationOn
     ) {
-        val popUp by remember { mutableStateOf(false) }
+        var popUp by remember { mutableStateOf(false) }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(it).fillMaxWidth().padding(0.dp,0.dp,0.dp,0.dp).fillMaxHeight()
@@ -54,12 +57,12 @@ fun CheckOutScreen(
             Image(
                 contentDescription = null,
                 painter = painterResource(R.drawable.checkoutbutton),
-                modifier = Modifier.scale(1.5f)
+                modifier = Modifier.scale(1.5f).clickable { popUp = true }
             )
             Spacer(modifier = Modifier.height(40.dp))
         }
         if (popUp) {
-            OrderConfirmationPopup {  }
+            OrderConfirmationPopup {onButtonClicked()  }
         }
     }
 }

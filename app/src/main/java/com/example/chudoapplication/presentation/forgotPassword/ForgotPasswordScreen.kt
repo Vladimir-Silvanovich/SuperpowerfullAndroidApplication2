@@ -1,6 +1,7 @@
 package com.example.chudoapplication.presentation.forgotPassword
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -33,9 +35,10 @@ import com.example.chudoapplication.presentation.signup.SignUpScreen
 
 @Composable
 fun ForgotPasswordScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onButtonClicked: () -> Unit = {},
 ){
-    val popUp by remember { mutableStateOf(false) }
+    var popUp by remember { mutableStateOf(false) }
     TopBar(
         title = R.drawable.logo,
         iconLeft = Icons.AutoMirrored.Filled.ArrowBack,
@@ -57,11 +60,15 @@ fun ForgotPasswordScreen(
                 contentDescription = null,
                 painter = painterResource(R.drawable.forgbutton),
                 modifier = Modifier.scale(1.5f)
+                    .clickable { popUp = true }
             )
             Spacer(modifier = Modifier.height(40.dp))
         }
         if (popUp){
-            PopupWindow()
+            PopupWindow {
+                onButtonClicked()
+                popUp = false
+            }
         }
     }
 }

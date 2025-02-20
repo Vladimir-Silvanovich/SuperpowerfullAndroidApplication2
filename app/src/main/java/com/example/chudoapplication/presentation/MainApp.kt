@@ -17,13 +17,17 @@ import com.example.chudoapplication.R
 import com.example.chudoapplication.presentation.Onboard.OnBoard1
 import com.example.chudoapplication.presentation.Onboard.OnBoard2
 import com.example.chudoapplication.presentation.Onboard.OnBoard3
+import com.example.chudoapplication.presentation.checkout.CheckOutScreen
 import com.example.chudoapplication.presentation.detailes.DetailsScreen
 import com.example.chudoapplication.presentation.favorite.FavoriteScreen
+import com.example.chudoapplication.presentation.forgotPassword.ForgotPasswordScreen
 import com.example.chudoapplication.presentation.home.HomeScreen
 import com.example.chudoapplication.presentation.myCart.MyCart
 import com.example.chudoapplication.presentation.signIn.SignInScreen
 import com.example.chudoapplication.presentation.signIn.SignInViewModel
+import com.example.chudoapplication.presentation.signup.SignUpScreen
 import com.example.chudoapplication.presentation.splashScreen.SplashScreen
+import com.example.chudoapplication.presentation.verification.VerificationScreen
 
 enum class AppScreen(@StringRes val title: Int) {
     SignIn(title = R.string.sign_in),
@@ -35,7 +39,10 @@ enum class AppScreen(@StringRes val title: Int) {
     HomeScreen(title = R.string.home_screen),
     Favorites(title = R.string.favorites),
     DetailScreen(title = R.string.detailed_screen),
-    MyCart(title = R.string.my_cart)
+    MyCart(title = R.string.my_cart),
+    ForgotPassword(title = R.string.forgotpassword),
+    Verification(title = R.string.verification),
+    Checkout(title = R.string.checkout)
 }
 
 @Composable
@@ -57,7 +64,23 @@ fun MainApp(
             .fillMaxSize()
     ){
         composable(route = AppScreen.SignIn.name) {
-            SignInScreen(onEnterClicked = {navController.navigate(AppScreen.SplashScreen.name)})
+            SignInScreen(
+                onEnterClicked = {navController.navigate(AppScreen.SplashScreen.name)},
+                onRegisterClicked= {navController.navigate(AppScreen.SignUp.name)},
+                onForgotPasswordClicked = {navController.navigate(AppScreen.ForgotPassword.name)}
+            )
+        }
+        composable(route = AppScreen.SignUp.name) {
+            SignUpScreen(
+                onEnterClicked = {navController.navigate(AppScreen.HomeScreen.name)},
+                onSignInClicked = {navController.navigate(AppScreen.SignIn.name)}
+            )
+        }
+        composable(route = AppScreen.ForgotPassword.name) {
+            ForgotPasswordScreen(onButtonClicked = {navController.navigate(AppScreen.Verification.name)})
+        }
+        composable(route = AppScreen.Verification.name) {
+            VerificationScreen(onButtonClicked = {navController.navigate(AppScreen.SignIn.name)})
         }
         composable(route = AppScreen.SplashScreen.name) {
             SplashScreen(action = {navController.navigate(AppScreen.OnBoard1.name)})
@@ -81,7 +104,10 @@ fun MainApp(
             DetailsScreen(onButtonClick = {navController.navigate(AppScreen.MyCart.name)} )
         }
         composable(route = AppScreen.MyCart.name) {
-            MyCart()
+            MyCart(onButtonClick ={navController.navigate(AppScreen.Checkout.name)} )
+        }
+        composable(route = AppScreen.Checkout.name) {
+            CheckOutScreen(onButtonClicked = {navController.navigate(AppScreen.HomeScreen.name)})
         }
     }
 }

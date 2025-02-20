@@ -49,6 +49,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -65,7 +66,8 @@ fun SignInScreen(
     modifier: Modifier = Modifier,
     viewModel: SignInViewModel = viewModel(),
     onEnterClicked: () -> Unit = {},
-    onRegisterClicked: () -> Unit = {}
+    onRegisterClicked: () -> Unit = {},
+    onForgotPasswordClicked: () -> Unit = {}
 ) {
 
     val snackbarHostState = remember { SnackbarHostState() }
@@ -86,7 +88,7 @@ fun SignInScreen(
         ) {
             Column(
                 modifier = Modifier
-                    .padding(top = 150.dp, start = 20.dp, end = 20.dp)
+                    .padding(top = 120.dp, start = 20.dp, end = 20.dp)
                     .fillMaxWidth()
                     .background(
                         color = Color.White
@@ -107,11 +109,17 @@ fun SignInScreen(
                     fontSize = 18.sp,
                     modifier = Modifier.fillMaxWidth().padding(17.dp,5.dp))
                 PasswordTextField()
+                Text("Восстановить",
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    textAlign = TextAlign.Right,
+                    modifier = Modifier.fillMaxWidth().padding(17.dp,5.dp)
+                        .clickable { onForgotPasswordClicked()  })
                 Button(onClick = onEnterClicked)
                 {
                     Text("Войти")
                 }
-                Spacer(Modifier.height(100.dp))
+                Spacer(Modifier.height(80.dp))
                 Image(contentDescription = "",
                     painter = painterResource(R.drawable.signinwithoutaccount),
                     modifier = Modifier.clickable {
